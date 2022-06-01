@@ -1,6 +1,6 @@
-import pino from 'pino';
+const pino = require('pino');
 
-export default pino({
+module.exports = pino({
     level: process.env.LOG_LEVEL || 'warn',
     prettyPrint: process.env.NODE_ENV !== 'production',
 });

@@ -8,11 +8,12 @@ const callsMock = require('../mocks/calls.json');
 
 const api = '/api/v1';
 const app = express();
-app.use(`${api}/call`, callRouter);
+app.use(`${api}/`, callRouter);
 
 describe('Get call', () => {
     it('should return call by id', async () => {
-        const res = await request(app).get(`${api}/call`);
+        const id = 2;
+        const res = await request(app).get(`${api}/call?id=${id}`);
         expect(res.body).toEqual({ oki: 'doki' });
     });
 });

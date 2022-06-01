@@ -1,10 +1,11 @@
 /* eslint-disable import/extensions */
-import express from 'express';
-import expressPino from 'express-pino-logger';
-import { serve, setup } from 'swagger-ui-express';
-import yaml from 'yamljs';
-import logger from './utils/logger.js';
-import callRouter from './routes/call.js';
+const express = require('express');
+const expressPino = require('express-pino-logger');
+const { serve, setup } = require('swagger-ui-express');
+const yaml = require('yamljs');
+const logger = require('./utils/logger');
+
+const callRouter = require('./routes/call');
 
 // generate api docs from swagger specs
 const swaggerDocument = yaml.load('./specs/swagger-specs.yaml');
@@ -16,6 +17,7 @@ const app = express();
 const api = '/api/v1';
 
 const expressLogger = expressPino({ logger });
+
 app.use(expressLogger);
 app.use(express.json());
 app.use(
@@ -24,7 +26,7 @@ app.use(
     })
 );
 
-app.use(`${api}/call`, callRouter);
+app.use(`${api}/`, callRouter);
 
 app.use('/docs', serve, setup(swaggerDocument));
 
@@ -44,5 +46,3 @@ process.on('unhandledRejection', (error) => {
 app.listen(5000, () => {
     console.log(`Example app listening on port ${5000}`);
 });
-
-export default app;
