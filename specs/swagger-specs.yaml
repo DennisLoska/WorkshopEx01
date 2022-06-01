@@ -1,0 +1,29 @@
+swagger: "2.0"
+info:
+  description: >-
+    This is a microservice that handles patient calls
+  version: 1.0.0
+  title: Sustainable Microservice powered by Test Driven development
+host: "localhost:4001"
+basePath: /api/v1
+tags:
+  - name: Calls
+    description: Includes operations for calls
+schemes:
+  - http
+paths:
+  /call:
+    get:
+      tags:
+        - Call
+      summary: Gets a call by it's id
+      description: "calls the exchangeratesapi.io"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successfully got the call
+        "400":
+          description: Bad request formatting
+        "500":
+          description: Internal Server Error
