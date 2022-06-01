@@ -1,0 +1,45 @@
+{
+  "name": "sustainability-workshop-01",
+  "version": "1.0.0",
+  "description": "Exercise 01 - Test Driven Development",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DennisLoska/WorkshopEx01.git"
+  },
+  "keywords": [
+    "TDD",
+    "Express",
+    "Swagger",
+    "JS"
+  ],
+  "author": "Dennis Loska",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/DennisLoska/WorkshopEx01/issues"
+  },
+  "homepage": "https://github.com/DennisLoska/WorkshopEx01#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "express": "~4.16.0",
+    "express-pino-logger": "^4.0.0",
+    "pino": "^5.16.0",
+    "pino-pretty": "^3.5.0",
+    "swagger-ui-express": "^4.1.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.16"
+  }
+}
