@@ -1,0 +1,21 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "comma-dangle": 0,
+        "no-prototype-builtins": 0,
+        "no-underscore-dangle": 0,
+        "no-param-reassign": ["error", { "props": false }],
+        "import/no-unresolved": 0,
+        "import/no-extraneous-dependencies": 0
+    }
+}
+
