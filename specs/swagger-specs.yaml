@@ -3,7 +3,7 @@ info:
   description: >-
     This is a microservice that handles patient calls
   version: 1.0.0
-  title: Sustainable Microservice powered by Test Driven development
+  title: Sustainable Microservice powered by Test Driven development💚🧐
 host: "localhost:4001"
 basePath: /api/v1
 tags:
@@ -17,13 +17,81 @@ paths:
       tags:
         - Call
       summary: Gets a call by it's id
-      description: "calls the exchangeratesapi.io"
+      description: "Gets a single call by it's id"
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Call"
+        "400":
+          description: Bad request formatting
+        "404":
+          description: Call not found
+        "500":
+          description: Internal Server Error
+  /calls:
+    get:
+      tags:
+        - Calls
+      summary: Gets all calls
+      description: "Gets all existing calls"
       produces:
         - application/json
       responses:
         "200":
-          description: Successfully got the call
-        "400":
-          description: Bad request formatting
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Call"
+        "404":
+          description: No calls found
         "500":
           description: Internal Server Error
+
+definitions:
+  DateTime:
+    type: string
+    format: ISO 8601 Combined, e.g. 2017-04-26T00:00:00.000Z
+  Call:
+    type: object
+    properties:
+      id:
+        type: number
+        example: 42
+      is_complete:
+        type: boolean
+        example: true
+      timestamp:
+        $ref: "#/definitions/DateTime"
+      type:
+        type: string
+        description: the call type, e.g. "appointment"
+        enum: ["appointment", "prescription", "emergency", "message"]
+      user:
+        type: object
+        properties:
+          sms_number:
+            type: string
+            example: "01764242420"
+          phone_number:
+            type: string
+            example: "03012345654"
+          name:
+            type: string
+            example: Max Mustermann
+      voicemails:
+        type: array
+        items:
+          type: object
+          properties:
+            transcription:
+              type: string
+              example: Ich möchte ein Rezept bestellen
