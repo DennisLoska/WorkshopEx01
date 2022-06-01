@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -32,6 +31,7 @@
     "express-pino-logger": "^4.0.0",
     "pino": "^5.16.0",
     "pino-pretty": "^3.5.0",
+    "supertest": "^6.2.3",
     "swagger-ui-express": "^4.1.1",
     "yamljs": "^0.3.0"
   },

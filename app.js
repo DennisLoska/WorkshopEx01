@@ -6,6 +6,7 @@ import yaml from 'yamljs';
 import logger from './utils/logger.js';
 import callRouter from './routes/call.js';
 
+// generate api docs from swagger specs
 const swaggerDocument = yaml.load('./specs/swagger-specs.yaml');
 swaggerDocument.host = process.env.HOST_IP || 'localhost:5000';
 const scheme = process.env.SCHEME || 'http';
@@ -25,7 +26,7 @@ app.use(
 
 app.use(`${api}/call`, callRouter);
 
-app.use('/', serve, setup(swaggerDocument));
+app.use('/docs', serve, setup(swaggerDocument));
 
 // error handler
 // it must have 4 parameters for Express to know that this is an error middleware
