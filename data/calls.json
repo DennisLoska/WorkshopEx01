@@ -1,6 +1,6 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"user": {
 			"sms_number": "+4917647914",
 			"phone_number": "+4903078544",
@@ -19,7 +19,7 @@
 		"type": "prescription"
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"user": {
 			"sms_number": "+491764777",
 			"phone_number": "+49035356547",
@@ -38,7 +38,7 @@
 		"type": "appointment"
 	},
 	{
-		"id": "3",
+		"id": 3,
 		"user": {
 			"sms_number": "+491768964",
 			"phone_number": "+490303457754",
