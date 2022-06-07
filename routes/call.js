@@ -14,7 +14,7 @@ router.get('/call', async (req, res) => {
         const { id } = req.query;
 
         // parameter validation
-        if (Number.isNaN(id)) {
+        if (Number.isNaN(Number.parseInt(id, 10))) {
             return res.status(400).json({
                 code: 400,
                 error: 'Bad formatting of request parameters'
@@ -49,13 +49,25 @@ router.get('/call', async (req, res) => {
 // GET endpoint to load all calls from JSON file
 router.get('/calls', async (req, res) => {
     try {
+        if (Object.keys(req.query).length > 0) {
+            return res.status(400).json({
+                code: 400,
+                error: 'Bad formatting of request parameters'
+            });
+        }
+
         const buffer = await readFile(`${process.env.PWD}/data/calls.json`);
-        const json = JSON.parse(buffer.toString('utf8'));
-        // TODO: error handling
-        res.status(200).json(json);
+        const calls = JSON.parse(buffer.toString('utf8'));
+
+        if (Array.isArray(calls) && calls.length === 0) {
+            // no call found
+            return res.status(404).json({ code: 404, error: 'Calls not found' });
+        }
+
+        return res.status(200).json(calls);
     } catch (error) {
         logger.error(error);
-        res.status(500).json({ code: 500, error: 'Failed to load JSON file' });
+        return res.status(500).json({ code: 500, error: 'Failed to load JSON file' });
     }
 });
 

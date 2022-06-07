@@ -51,6 +51,8 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Call"
+        "400":
+          description: Bad request formatting
         "404":
           description: No calls found
         "500":
