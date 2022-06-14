@@ -11,7 +11,8 @@
   "jest": {
     "modulePathIgnorePatterns": [
       "data"
-    ]
+    ],
+    "testTimeout": 1000
   },
   "repository": {
     "type": "git",
