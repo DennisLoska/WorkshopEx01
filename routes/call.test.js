@@ -61,6 +61,21 @@ describe('GET call', () => {
 });
 
 describe('GET calls', () => {
+    let existingCalls = null;
+
+    beforeAll(async () => {
+        const buffer = await readFile(`${process.env.PWD}/data/calls.json`);
+        existingCalls = JSON.parse(buffer.toString('utf8'));
+    });
+
+    afterAll(async () => {
+        // restore calls again (think of DB test data)
+        await writeFile(
+            `${process.env.PWD}/data/calls.json`,
+            JSON.stringify(existingCalls), 'utf8'
+        );
+    });
+
     it('should return all existing calls', async () => {
         const res = await request(app).get(`${api}/calls`);
         expect(res.body).toEqual([
@@ -103,10 +118,6 @@ describe('GET calls', () => {
     });
 
     it('should return an error object with status 404 when no calls were found', async () => {
-        // read calls directly from file (think of DB test data)
-        const buffer = await readFile(`${process.env.PWD}/data/calls.json`);
-        const calls = JSON.parse(buffer.toString('utf8'));
-
         // delete calls from file (think of DB test data)
         await writeFile(`${process.env.PWD}/data/calls.json`, '[]', 'utf8');
 
@@ -116,8 +127,5 @@ describe('GET calls', () => {
             error: 'Calls not found'
         });
         expect(res.status).toEqual(404);
-
-        // restore calls again (think of DB test data)
-        await writeFile(`${process.env.PWD}/data/calls.json`, JSON.stringify(calls), 'utf8');
     });
 });
