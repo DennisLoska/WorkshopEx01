@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon",
-    "test": "jest"
+    "test": "jest --watch"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "data"
+    ]
   },
   "repository": {
     "type": "git",
