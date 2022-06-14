@@ -71,6 +71,7 @@ router.get('/calls', async (req, res) => {
     }
 });
 
+// OUT OF SCOPE / HOMEWORK :D
 // POST endpoint to save calls from request body to JSON file
 router.post('/calls', async (req, res) => {
     try {
