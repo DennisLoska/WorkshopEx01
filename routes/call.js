@@ -11,63 +11,40 @@ const router = Router();
 router.get('/call', async (req, res) => {
     try {
         // extract query parameters
-        const { id } = req.query;
+        // your code here...
 
         // parameter validation
-        if (Number.isNaN(Number.parseInt(id, 10))) {
-            return res.status(400).json({
-                code: 400,
-                error: 'Bad formatting of request parameters'
-            });
-        }
+        // your code here...
 
-        // get call data (think of an actual DB query here)
+        // Do not change these two lines!
+        // Get call data (think of an actual DB query here)
         const buffer = await readFile(`${process.env.PWD}/data/calls.json`);
         const calls = JSON.parse(buffer.toString('utf8'));
 
-        // general validation of operation
-        if (Array.isArray(calls)) {
-            const call = calls.find((c) => c.id.toString() === id);
-            if (call) {
-                return res.status(200).json(call);
-            }
-
-            // no call found
-            return res.status(404).json({ code: 404, error: 'Call not found' });
-        }
-        return res.status(500).json(
-            { code: 500, error: 'Internal server error' }
-        );
+        // general validation of operation + return responses
+        // your code here...
     } catch (error) {
-        logger.error(error);
-        return res.status(500).json(
-            { code: 500, error: 'Failed to load JSON file' }
-        );
+        // error handling
+        // your code here...
     }
 });
 
 // GET endpoint to load all calls from JSON file
 router.get('/calls', async (req, res) => {
     try {
-        if (Object.keys(req.query).length > 0) {
-            return res.status(400).json({
-                code: 400,
-                error: 'Bad formatting of request parameters'
-            });
-        }
+        // parameter validation
+        // your code here...
 
+        // Do not change these two lines!
+        // Get call data (think of an actual DB query here)
         const buffer = await readFile(`${process.env.PWD}/data/calls.json`);
         const calls = JSON.parse(buffer.toString('utf8'));
 
-        if (Array.isArray(calls) && calls.length === 0) {
-            // no call found
-            return res.status(404).json({ code: 404, error: 'Calls not found' });
-        }
-
-        return res.status(200).json(calls);
+        // general validation of operation + return responses
+        // your code here...
     } catch (error) {
-        logger.error(error);
-        return res.status(500).json({ code: 500, error: 'Failed to load JSON file' });
+        // error handling
+        // your code here...
     }
 });
 
@@ -75,13 +52,17 @@ router.get('/calls', async (req, res) => {
 // POST endpoint to save calls from request body to JSON file
 router.post('/calls', async (req, res) => {
     try {
+        // TODO: body sanitization
         const data = JSON.stringify(req.body);
+
+        // TODO: refactor to not overwrite whole file, but to only push new call to it
         await writeFile(`${process.env.PWD}/data/calls.json`, data, 'utf8');
-        res.status(200).json(data);
-        // TODO: do not overwrite whole file
+
+        // general validation of operation + return responses
+        // your code here...
+        // e.g. res.status(200).json(data);
     } catch (error) {
-        logger.error(error);
-        res.status(500).json({ code: 500, error: 'Failed to write JSON file' });
+        // TODO: error handling
     }
 });
 
